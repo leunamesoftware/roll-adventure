@@ -1,0 +1,40 @@
+{
+  "background_color": "#7ec8e3",
+  "level_width": 2600,
+  "level_height": 900,
+  "player_start": [100, 600],
+
+  "platforms": [
+    {"pos": [300, 700], "size": [600, 60]},
+    {"pos": [950, 540], "size": [160, 32]},
+    {"pos": [1050, 700], "size": [600, 60]},
+    {"pos": [2050, 700], "size": [500, 60]},
+    {"pos": [2450, 700], "size": [300, 60]}
+  ],
+
+  "moving_platforms": [
+    {"pos": [1550, 650], "size": [140, 32], "travel": [320, 0], "speed": 100}
+  ],
+
+  "spikes": [
+    {"pos": [1200, 670], "width": 120, "count": 3}
+  ],
+
+  "coins": [
+    [300, 600], [600, 600], [950, 470], [1050, 600], [1250, 600],
+    [1500, 580], [1700, 580], [2050, 600], [2200, 600], [2450, 600]
+  ],
+
+  "gems": [
+    [950, 400], [2200, 540]
+  ],
+
+  "secret_star": {"pos": [1200, 240]},
+
+  "enemies": [
+    {"type": "flyer", "pos": [1450, 480], "patrol_distance": 130, "speed": 90},
+    {"type": "patrol", "style": "crawler", "pos": [2050, 670], "patrol_distance": 160, "speed": 70}
+  ],
+
+  "goal": {"pos": [2500, 670]}
+}

@@ -1,0 +1,38 @@
+{
+  "worlds": [
+    {
+      "id": "floresta",
+      "name": "Floresta Verde",
+      "order": 1,
+      "levels": [
+        {"id": "fase_1", "name": "Fase 1", "order": 1, "coin_target": 8, "scene_data": "res://data/levels/floresta_fase_1.json"},
+        {"id": "fase_2", "name": "Fase 2", "order": 2, "coin_target": 10, "scene_data": "res://data/levels/floresta_fase_2.json"},
+        {"id": "fase_3", "name": "Fase 3", "order": 3, "coin_target": 12, "scene_data": "res://data/levels/floresta_fase_3.json"}
+      ]
+    },
+    {
+      "id": "cidade",
+      "name": "Cidade Colorida",
+      "order": 2,
+      "levels": []
+    },
+    {
+      "id": "deserto",
+      "name": "Deserto Dourado",
+      "order": 3,
+      "levels": []
+    },
+    {
+      "id": "gelo",
+      "name": "Montanhas Geladas",
+      "order": 4,
+      "levels": []
+    },
+    {
+      "id": "vulcao",
+      "name": "Vulcão de Fogo",
+      "order": 5,
+      "levels": []
+    }
+  ]
+}
