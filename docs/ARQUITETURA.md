@@ -1,11 +1,11 @@
-# Arquitetura — Roll Adventure
+# Arquitetura — Trixo
 
 ## Stack
 
 - **Engine**: Godot 4.3 (GDScript). Escolhida por ser gratuita/open-source sem taxas de
   licença mesmo com o jogo faturando, leve, exporta nativamente para Android (APK/AAB) e
   Web, e usa arquivos em texto (bom para Git).
-- **Orientação**: paisagem (`sensor_landscape`). É um jogo de plataforma lateral (a bolinha
+- **Orientação**: paisagem (`sensor_landscape`). É um jogo de plataforma lateral (o Trixo
   corre para os lados), então a tela precisa ser mais larga que alta — diferente das
   imagens de referência (que são só mockups de composição, não screenshots reais de
   device). Viewport base: 1920x1080.
@@ -123,7 +123,7 @@ entra em cada entidade como um `Sprite2D`/`AnimatedSprite2D` sem precisar mexer 
 
 - Menu principal, seleção de 5 mundos (só Floresta Verde desbloqueada), mapa de fases.
 - 3 fases completas e com dificuldade progressiva no Mundo 1 (Floresta Verde).
-- Bolinha: mover, pular, pulo duplo (desbloqueia ao terminar a Fase 1).
+- Trixo: mover, pular, pulo duplo (desbloqueia ao terminar a Fase 1).
 - Moedas, gemas, estrela secreta, 3 estilos de inimigo terrestre, inimigo voador,
   espinhos, armadilha giratória, plataforma móvel (horizontal e vertical), bandeira.
 - HUD completo (vidas, moedas, gemas, tempo, objetivos), joystick virtual + pular + poder.

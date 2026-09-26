@@ -30,7 +30,7 @@
 | 1 | Tela Inicial / Menu | Logo, personagem, Jogar, Personagens, Mundos, Conquistas, Configurações, moedas/recursos |
 | 2 | Seleção de Mundos | Lista de mundos, estrelas, bloqueio, navegação |
 | 3 | Gameplay (fase) | Inimigos terrestres/voadores/especiais, obstáculos, coletáveis, HUD (vidas, moedas, tempo, poder, pausa), controles (esquerda/direita/pular/poder) |
-| 4 | Personagens | Bolinha (principal) + skins originais desbloqueáveis |
+| 4 | Personagens | Trixo (principal) + skins originais desbloqueáveis |
 | 5 | Loja | Moedas, vidas, escudos, ímãs, poderes, skins — opcional, sem obrigar compra; recompensa por anúncio voluntário |
 | 6 | Mapa de Fases | Progresso por fase, estrelas, fases bloqueadas, chefe do mundo |
 | 7 | Vitória | Estrelas, moedas, tempo, pontuação, recompensas, próxima fase/repetir/menu |

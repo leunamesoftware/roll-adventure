@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name Player
-## Personagem principal original: uma bolinha com rosto, desenhada via _draw() (sem
-## dependência de arte externa). Movimento lateral + pulo + pulo duplo desbloqueável.
+## Personagem principal original (TRIXO), desenhado via _draw() (sem dependência de
+## arte externa) até a arte final entrar. Movimento lateral + pulo + pulo duplo
+## desbloqueável.
 
 signal died
 signal coin_collected(total: int)
@@ -15,8 +16,8 @@ const DOUBLE_JUMP_VELOCITY := -760.0
 const MAX_FALL_SPEED := 1400.0
 const INVULNERABLE_TIME := 1.2
 
-const BODY_COLOR := Color(0.18, 0.56, 0.94)
-const BODY_COLOR_DARK := Color(0.11, 0.37, 0.74)
+const BODY_COLOR := Color(0.96, 0.55, 0.14)
+const BODY_COLOR_DARK := Color(0.85, 0.32, 0.1)
 const FACE_COLOR := Color(0.09, 0.14, 0.25)
 
 var _gravity: float = 980.0

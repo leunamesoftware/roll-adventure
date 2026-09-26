@@ -1,7 +1,7 @@
 extends Control
 class_name VirtualJoystick
 ## Joystick virtual circular original para controlar o eixo horizontal do jogador
-## (arrastar o dedo dentro da base move a bolinha). Suporta touch (multitouch via
+## (arrastar o dedo dentro da base move o personagem). Suporta touch (multitouch via
 ## índice) e mouse (para testar no editor/desktop).
 
 signal direction_changed(value: float)

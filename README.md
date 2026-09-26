@@ -1,6 +1,6 @@
-# Roll Adventure
+# Trixo
 
-Jogo de aventura/plataforma original para Android — controle uma bolinha através de
+Jogo de aventura/plataforma original para Android — controle o Trixo através de
 mundos, fases, inimigos e desafios. Personagens, cenários, inimigos e obstáculos são
 todos originais (ver `docs/REFERENCIA_VISUAL.md` sobre o uso de imagens de referência).
 

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Roll Adventure"
-config/description="Jogo de aventura/plataforma original — controle uma bolinha através de mundos, fases, inimigos e desafios."
+config/name="Trixo"
+config/description="Jogo de aventura/plataforma original — controle o Trixo através de mundos, fases, inimigos e desafios."
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"

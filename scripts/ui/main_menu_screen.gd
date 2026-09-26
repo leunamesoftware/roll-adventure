@@ -18,10 +18,10 @@ func _ready() -> void:
 	root.add_theme_constant_override("separation", 14)
 	add_child(root)
 
-	root.add_child(make_label("ROLL ADVENTURE", 44, COLOR_ACCENT))
+	root.add_child(make_label("TRIXO", 44, COLOR_ACCENT))
 	root.add_child(make_label("Pequenas ações, grandes aventuras", 18, COLOR_TEXT_DIM))
 	root.add_child(spacer(16))
-	root.add_child(make_label("🔵", 90))
+	root.add_child(make_label("🟠", 90))
 	root.add_child(spacer(16))
 
 	var play_button := make_button("▶  JOGAR", COLOR_SUCCESS, Vector2(320, 84))
