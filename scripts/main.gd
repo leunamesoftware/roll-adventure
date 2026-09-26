@@ -9,4 +9,4 @@ func _ready() -> void:
 	container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	layer.add_child(container)
 	SceneRouter.set_container(container)
-	SceneRouter.go_to("main_menu")
+	SceneRouter.go_to("studio_splash")

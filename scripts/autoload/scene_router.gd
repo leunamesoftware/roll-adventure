@@ -10,6 +10,7 @@ var _screens: Dictionary = {}
 
 func _ready() -> void:
 	_screens = {
+		"studio_splash": preload("res://scripts/ui/studio_splash_screen.gd"),
 		"main_menu": preload("res://scripts/ui/main_menu_screen.gd"),
 		"world_select": preload("res://scripts/ui/world_select_screen.gd"),
 		"level_map": preload("res://scripts/ui/level_map_screen.gd"),
