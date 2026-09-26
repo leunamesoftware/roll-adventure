@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1790444579|6383468';
+const CACHE_VERSION = '1790445266|6557738';
 /** @type {string} */
 const CACHE_PREFIX = 'Trixo-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
