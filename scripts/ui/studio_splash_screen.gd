@@ -32,6 +32,7 @@ func _ready() -> void:
 
 	var bottom_margin := MarginContainer.new()
 	bottom_margin.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	bottom_margin.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	bottom_margin.add_theme_constant_override("margin_bottom", 60)
 	bottom_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bottom_margin)

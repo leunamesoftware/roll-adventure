@@ -146,5 +146,10 @@ func _add_goal(g: Dictionary) -> void:
 	goal.reached.connect(func(): goal_reached.emit())
 	add_child(goal)
 
+const BACKGROUND_PADDING := 600.0 ## garante que o fundo cubra a tela mesmo em celulares
+## com proporção bem diferente de 16:9 (a câmera pode mostrar área além do
+## tamanho "oficial" da fase, principalmente na vertical).
+
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, level_size), background_color, true)
+	var pad := Vector2(BACKGROUND_PADDING, BACKGROUND_PADDING)
+	draw_rect(Rect2(-pad, level_size + pad * 2.0), background_color, true)

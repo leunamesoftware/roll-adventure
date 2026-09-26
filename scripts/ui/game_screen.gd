@@ -20,6 +20,13 @@ var _elapsed: float = 0.0
 var _paused_or_ended: bool = false
 var _overlay_nodes: Array = []
 
+## Margem generosa acima/abaixo da fase: em telas com proporção bem diferente de
+## 16:9, a câmera pode precisar mostrar mais altura do que a fase "oficial" tem.
+## Sem essa folga, o Camera2D não consegue respeitar o limite e a área extra
+## aparece vazia (sem fundo desenhado). Os limites laterais ficam justos mesmo,
+## porque a fase é bem mais larga que qualquer celular.
+const VERTICAL_CAMERA_MARGIN := 500
+
 func _ready() -> void:
 	set_process(true)
 
@@ -40,9 +47,9 @@ func setup(params: Dictionary) -> void:
 	_camera = Camera2D.new()
 	_camera.enabled = true
 	_camera.limit_left = 0
-	_camera.limit_top = 0
+	_camera.limit_top = -VERTICAL_CAMERA_MARGIN
 	_camera.limit_right = int(_level_builder.level_size.x)
-	_camera.limit_bottom = int(_level_builder.level_size.y)
+	_camera.limit_bottom = int(_level_builder.level_size.y) + VERTICAL_CAMERA_MARGIN
 	_camera.position_smoothing_enabled = true
 	_camera.position_smoothing_speed = 6.0
 	_level_builder.player.add_child(_camera)
@@ -115,6 +122,7 @@ func _build_hud() -> void:
 func _build_controls() -> void:
 	var bottom_margin := MarginContainer.new()
 	bottom_margin.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	bottom_margin.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	bottom_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bottom_margin.add_theme_constant_override("margin_left", 28)
 	bottom_margin.add_theme_constant_override("margin_right", 28)
