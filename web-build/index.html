@@ -98,7 +98,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2785760,"index.wasm":35376909},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2786128,"index.wasm":35376909},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -195,6 +195,36 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 }());
 		</script>
-	</body>
+	<style>
+  #rotate-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0b0e1a;
+    color: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, system-ui, sans-serif;
+    text-align: center;
+    padding: 24px;
+  }
+  #rotate-overlay svg { width: 88px; height: 88px; margin-bottom: 22px; animation: rotate-hint 1.6s ease-in-out infinite; }
+  @keyframes rotate-hint {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+  }
+  @media (orientation: portrait) {
+    #rotate-overlay { display: flex; }
+  }
+</style>
+<div id="rotate-overlay">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#ff8c1a" stroke-width="1.6">
+    <rect x="7" y="2" width="10" height="16" rx="2"></rect>
+    <line x1="10" y1="20" x2="14" y2="20"></line>
+  </svg>
+  <div style="font-size:22px; font-weight:bold; margin-bottom:8px;">Gire seu celular</div>
+  <div style="font-size:16px; opacity:0.75;">Deite o celular na horizontal para jogar</div>
+</div>
+</body>
 </html>
 
