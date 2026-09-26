@@ -1,13 +1,15 @@
 extends CharacterBody2D
 class_name Player
-## Personagem principal original (TRIXO), desenhado via _draw() (sem dependência de
-## arte externa) até a arte final entrar. Movimento lateral + pulo + pulo duplo
-## desbloqueável.
+## Personagem principal (TRIXO). Usa a arte oficial do personagem (assets/sprites/
+## trixo_run.png) como sprite único por enquanto — animação por quadros (parado,
+## correndo, pulando) fica para uma próxima etapa. Movimento lateral + pulo + pulo
+## duplo desbloqueável.
 
 signal died
 signal coin_collected(total: int)
 
-const RADIUS := 28.0
+const RADIUS := 28.0 ## raio efetivo usado para cálculos de gameplay (ex.: pisão em inimigo)
+const SPRITE_HEIGHT := 84.0 ## altura visual do personagem em pixels
 const SPEED := 320.0
 const ACCELERATION := 2400.0
 const FRICTION := 2600.0
@@ -16,9 +18,9 @@ const DOUBLE_JUMP_VELOCITY := -760.0
 const MAX_FALL_SPEED := 1400.0
 const INVULNERABLE_TIME := 1.2
 
-const BODY_COLOR := Color(0.96, 0.55, 0.14)
-const BODY_COLOR_DARK := Color(0.85, 0.32, 0.1)
-const FACE_COLOR := Color(0.09, 0.14, 0.25)
+const SPRITE_TEXTURE := preload("res://assets/sprites/trixo_run.png")
+
+var _sprite: Sprite2D
 
 var _gravity: float = 980.0
 var _direction_input: float = 0.0
@@ -34,11 +36,21 @@ func _ready() -> void:
 	_gravity = ProjectSettings.get_setting("physics/2d/default_gravity", 980.0)
 	collision_layer = CollisionLayers.PLAYER
 	collision_mask = CollisionLayers.WORLD
-	var shape := CircleShape2D.new()
-	shape.radius = RADIUS
+
+	var shape := CapsuleShape2D.new()
+	shape.radius = 22.0
+	shape.height = SPRITE_HEIGHT - shape.radius * 2.0
 	var cs := CollisionShape2D.new()
 	cs.shape = shape
 	add_child(cs)
+
+	_sprite = Sprite2D.new()
+	_sprite.texture = SPRITE_TEXTURE
+	var tex_size := SPRITE_TEXTURE.get_size()
+	var sprite_scale: float = SPRITE_HEIGHT / tex_size.y
+	_sprite.scale = Vector2(sprite_scale, sprite_scale)
+	add_child(_sprite)
+
 	add_to_group("player")
 	_can_double_jump = GameManager.double_jump_unlocked
 
@@ -58,7 +70,6 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		_has_double_jumped = false
 	_update_squash(delta)
-	queue_redraw()
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -68,6 +79,7 @@ func _handle_horizontal(delta: float) -> void:
 	var target_speed := _direction_input * SPEED
 	if _direction_input != 0.0:
 		_facing = sign(_direction_input)
+		_sprite.flip_h = _facing > 0.0  ## arte original olha para a esquerda
 		velocity.x = move_toward(velocity.x, target_speed, ACCELERATION * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
@@ -120,23 +132,3 @@ func collect_coin(amount: int = 1) -> void:
 
 func enable_double_jump() -> void:
 	_can_double_jump = true
-
-func _draw() -> void:
-	draw_circle(Vector2.ZERO, RADIUS, BODY_COLOR)
-	draw_arc(Vector2.ZERO, RADIUS - 2.0, PI, TAU, 32, BODY_COLOR_DARK, 4.0)
-	var eye_offset := Vector2(RADIUS * 0.32 * _facing, -RADIUS * 0.05)
-	var eye_gap := Vector2(RADIUS * 0.34, 0.0)
-	draw_circle(eye_offset - eye_gap, RADIUS * 0.16, FACE_COLOR)
-	draw_circle(eye_offset + eye_gap, RADIUS * 0.16, FACE_COLOR)
-	_draw_smile(Vector2(0, RADIUS * 0.28))
-
-func _draw_smile(center: Vector2) -> void:
-	var points := PackedVector2Array()
-	var width := RADIUS * 0.5
-	var steps := 12
-	for i in range(steps + 1):
-		var t := float(i) / float(steps)
-		var x: float = lerp(-width, width, t)
-		var y := sin(t * PI) * RADIUS * 0.22
-		points.append(center + Vector2(x, y))
-	draw_polyline(points, FACE_COLOR, 4.0, true)
