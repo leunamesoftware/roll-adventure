@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
-"""Injeta o aviso "Gire seu celular" no index.html exportado pelo Godot.
+"""Pós-processa o build Web exportado pelo Godot (index.html e manifest.json).
 
-O jogo só funciona bem na horizontal, mas o navegador não gira o celular
-sozinho. Sem isso, quem abrir na vertical acha que o jogo travou. Este
-script insere um overlay em CSS puro (aparece sozinho via media query
-"orientation: portrait", sem precisar de JavaScript extra) logo antes de
-</body> no HTML exportado.
+O export do Godot sozinho deixa duas coisas erradas para um PWA mobile:
+
+1. Não avisa o jogador para girar o celular (o jogo é só paisagem, mas o
+   navegador não gira a tela sozinho) — sem isso, quem abre na vertical acha
+   que travou. Corrigido injetando um overlay em CSS puro (aparece via media
+   query "orientation: portrait", sem JavaScript) antes de </body>.
+2. O manifest.json sai com "orientation":"portrait" (errado, o app é
+   paisagem) e os ícones sem "purpose":"maskable" — por isso a tela de
+   abertura do app instalado mostra o ícone quadrado "cru", diferente dos
+   outros apps que aparecem arredondados/circulares.
 
 Uso: rodar depois de cada `godot --export-release "Web" build/web/index.html`.
 """
 
+import json
 import sys
 from pathlib import Path
 
@@ -52,22 +58,41 @@ OVERLAY = """
     </svg>
   </div>
   <div style="font-size:22px; font-weight:bold; margin-bottom:8px;">Gire seu celular</div>
-  <div style="font-size:16px; opacity:0.75;">Deite o celular na horizontal para jogar</div>
+  <div style="font-size:16px; opacity:0.75; margin-bottom:22px;">Deite o celular na horizontal para jogar</div>
+  <div style="font-size:13px; opacity:0.6; max-width:280px; margin-bottom:14px;">Se a tela não girar sozinha, ative a rotação automática nas configurações do celular.</div>
+  <div id="rotate-skip" style="font-size:14px; text-decoration:underline; opacity:0.55; cursor:pointer;" onclick="document.getElementById('rotate-overlay').style.setProperty('display','none','important')">Jogar mesmo assim</div>
 </div>
 """.strip()
 
 
-def main() -> None:
-    path = Path(sys.argv[1] if len(sys.argv) > 1 else "build/web/index.html")
-    html = path.read_text(encoding="utf-8")
+def inject_overlay(html_path: Path) -> None:
+    html = html_path.read_text(encoding="utf-8")
     if 'id="rotate-overlay"' in html:
         print("rotate overlay already present, skipping")
         return
     if "</body>" not in html:
-        raise SystemExit(f"</body> not found in {path}")
+        raise SystemExit(f"</body> not found in {html_path}")
     html = html.replace("</body>", OVERLAY + "\n</body>")
-    path.write_text(html, encoding="utf-8")
-    print(f"rotate overlay injected into {path}")
+    html_path.write_text(html, encoding="utf-8")
+    print(f"rotate overlay injected into {html_path}")
+
+
+def fix_manifest(manifest_path: Path) -> None:
+    if not manifest_path.exists():
+        print(f"{manifest_path} not found, skipping manifest fix")
+        return
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    data["orientation"] = "landscape"
+    for icon in data.get("icons", []):
+        icon["purpose"] = "any maskable"
+    manifest_path.write_text(json.dumps(data), encoding="utf-8")
+    print(f"manifest fixed (orientation=landscape, maskable icons) in {manifest_path}")
+
+
+def main() -> None:
+    web_dir = Path(sys.argv[1] if len(sys.argv) > 1 else "build/web")
+    inject_overlay(web_dir / "index.html")
+    fix_manifest(web_dir / "index.manifest.json")
 
 
 if __name__ == "__main__":

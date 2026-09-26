@@ -98,7 +98,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2786128,"index.wasm":35376909},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2786224,"index.wasm":35376909},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -233,7 +233,9 @@ const engine = new Engine(GODOT_CONFIG);
     </svg>
   </div>
   <div style="font-size:22px; font-weight:bold; margin-bottom:8px;">Gire seu celular</div>
-  <div style="font-size:16px; opacity:0.75;">Deite o celular na horizontal para jogar</div>
+  <div style="font-size:16px; opacity:0.75; margin-bottom:22px;">Deite o celular na horizontal para jogar</div>
+  <div style="font-size:13px; opacity:0.6; max-width:280px; margin-bottom:14px;">Se a tela não girar sozinha, ative a rotação automática nas configurações do celular.</div>
+  <div id="rotate-skip" style="font-size:14px; text-decoration:underline; opacity:0.55; cursor:pointer;" onclick="document.getElementById('rotate-overlay').style.setProperty('display','none','important')">Jogar mesmo assim</div>
 </div>
 </body>
 </html>
